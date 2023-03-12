@@ -15,3 +15,22 @@ Gene::Gene() {
 Gene::Gene(bool g) {
     gene = g;
 }
+
+Gene &Gene::operator=(const Gene &g) {
+    this->gene = g.gene;
+}
+
+bool Gene::operator==(const Gene &g) {
+    if (this->gene == g.gene){
+        return true;
+    }
+    return false;
+}
+
+ostream &operator<< (ostream& out, const Gene& g){
+    return out << g << '/';
+}
+
+istream& operator>> (istream& in, const Gene& g){
+    return in >> g >> '/';
+}
