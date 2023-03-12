@@ -23,3 +23,11 @@ Chromosome::Chromosome(Chromosome &c) {
 Chromosome::~Chromosome() {
     delete [] chromosome;
 }
+
+Chromosome::Chromosome(Gene *genes, int size) {
+    this->size = size;
+    chromosome = new Gene[size];
+    for (int i = 0; i < size; ++i) {
+        chromosome[i] = genes[i];
+    }
+}
