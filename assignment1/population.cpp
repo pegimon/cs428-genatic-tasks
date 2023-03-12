@@ -19,7 +19,7 @@ Population::Population(Chromosome *chromosomes, int size) {
 
 Population::Population(Population &population) {
     this->size = population.size;
-    population.chromosomes = new Chromosome[size];
+    this->chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
         this->chromosomes[i] = population.chromosomes[i];
     }
@@ -36,4 +36,3 @@ void Population::mutation(int idx) {
 Chromosome *Population::crossOver(Chromosome &c1, Chromosome &c2) {
 
 }
-
