@@ -13,6 +13,6 @@ public:
     Gene &operator=(const Gene &g);
     bool operator==(const Gene &g);
     friend ostream& operator<< (ostream& out, const Gene& g);
-    friend istream& operator>> (istream& in, const Gene& g);
+    friend istream& operator>> (istream& in, Gene& g);
 };
 #endif //ASSIGNMENT1_GENE_H

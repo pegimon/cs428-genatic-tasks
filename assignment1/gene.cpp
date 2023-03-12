@@ -28,9 +28,13 @@ bool Gene::operator==(const Gene &g) {
 }
 
 ostream &operator<< (ostream& out, const Gene& g){
-    return out << g << '/';
+    out << g.gene;
+    return out;
 }
 
-istream& operator>> (istream& in, const Gene& g){
-    return in >> g >> '/';
+istream& operator>> (istream& in,Gene& g){
+    bool input;
+    in >> input;
+    g.setGene(input);
+    return in;
 }

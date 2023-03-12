@@ -1,6 +1,8 @@
 #include <iostream>
-
+#include "gene.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Gene g;
+    cin >> g;
+    cout << g << '\n';
     return 0;
 }
