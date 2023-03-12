@@ -1,8 +1,14 @@
 #include <iostream>
-#include "gene.h"
+#include "population.h"
 int main() {
-    Gene g;
-    cin >> g;
-    cout << g << '\n';
+    Population p(5);
+    int count=0;
+    while (true){
+        count++;
+        p.crossOver();
+        p.mutation();
+        cout<<p<<endl;
+    }
+    cout<<p<<endl;
     return 0;
 }

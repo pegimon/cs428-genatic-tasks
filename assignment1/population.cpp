@@ -14,6 +14,16 @@ Population::Population() {
     }
 }
 
+Population::Population(int size) {
+    srand(seed);
+    this->size = size;
+    int chromosomeSize = rand() % size + 4;
+    chromosomes = new Chromosome[size];
+    for (int i = 0; i < size; ++i) {
+        chromosomes[i] = Chromosome(chromosomeSize);
+    }
+}
+
 Population::Population(Chromosome *chromosomes, int size) {
     this->size = size;
     this->chromosomes = new Chromosome[size];
@@ -34,7 +44,11 @@ Population::~Population() {
     delete [] chromosomes;
 }
 
-Chromosome Population::fitness() {
+int Population::getSize() {
+    return size;
+}
+
+int Population::fitness() {
     int maxFitness = -1,mxidx;
     for (int i = 0; i < size; ++i) {
         int currentFitness = this->chromosomes[i].fitness();
@@ -43,12 +57,12 @@ Chromosome Population::fitness() {
             mxidx = i;
         }
     }
-    return this->chromosomes[mxidx];
+    return mxidx;
 }
 
 void Population::mutation() {
-    Chromosome c = fitness();
-    c.mutation();
+    int idx = fitness();
+    chromosomes[idx].mutation();
 }
 
 void Population::crossOver() {
@@ -58,8 +72,8 @@ void Population::crossOver() {
         idx2 = rand() % size;
     }
     Chromosome* c = chromosomes[idx1].crossOver(chromosomes[idx2]);
-    if (chromosomes[idx1].fitness() < c[0].fitness()) chromosomes[idx1] = c[0];
-    if (chromosomes[idx2].fitness() < c[1].fitness()) chromosomes[idx2] = c[1];
+    chromosomes[idx1] = c[0];
+    chromosomes[idx2] = c[1];
 }
 
 Population &Population::operator=(const Population &c) {

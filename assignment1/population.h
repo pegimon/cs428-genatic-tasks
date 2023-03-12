@@ -13,10 +13,12 @@ class Population {
     int size,seed=10;
 public:
     Population();
+    Population(int size);
     Population(Chromosome* chromosomes,int size);
     Population(Population &population);
     ~Population();
-    Chromosome fitness();
+    int getSize();
+    int fitness();
     void mutation();
     void crossOver();
     Population& operator=(const Population &c);
