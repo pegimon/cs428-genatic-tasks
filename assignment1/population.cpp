@@ -12,7 +12,6 @@ Population::Population() {
     for (int i = 0; i < size; ++i) {
         chromosomes[i] = Chromosome(chromosomeSize);
     }
-    fittest = fitness();
 }
 
 Population::Population(Chromosome *chromosomes, int size) {
@@ -63,4 +62,35 @@ void Population::crossOver() {
     if (chromosomes[idx2].fitness() < c[1].fitness()) chromosomes[idx2] = c[1];
 }
 
+Population &Population::operator=(const Population &c) {
+    this->size = c.size;
+    this->chromosomes = new Chromosome[size];
+    for (int i = 0; i < size; ++i) {
+        this->chromosomes[i] = c.chromosomes[i];
+    }
+    return *this;
+}
 
+bool Population::operator==(const Population &p) {
+    if(p.size == this->size){
+        for (int i = 0; i < size; ++i) {
+            if (this->chromosomes[i] == p.chromosomes[i])continue;
+            else return false;
+        }
+    }else return false;
+    return true;
+}
+
+ostream &operator<<(ostream &out, const Population &p) {
+    for (int i = 0; i < p.size; ++i) {
+        out << p.chromosomes[i] << '\n';
+    }
+    return out;
+}
+
+istream &operator>>(istream &in, const Population &p) {
+    for (int i = 0; i < p.size; ++i) {
+        in >> p.chromosomes[i];
+    }
+    return in;
+}

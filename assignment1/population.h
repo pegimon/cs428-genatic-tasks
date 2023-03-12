@@ -9,7 +9,7 @@
 using namespace std;
 
 class Population {
-    Chromosome *chromosomes,fittest;
+    Chromosome *chromosomes;
     int size,seed=10;
 public:
     Population();
@@ -19,5 +19,9 @@ public:
     Chromosome fitness();
     void mutation();
     void crossOver();
+    Population& operator=(const Population &c);
+    bool operator==(const Population &c);
+    friend ostream& operator<<(ostream &out,const Population& p);
+    friend istream& operator>>(istream &in,const Population& p);
 };
 #endif //ASSIGNMENT1_POPULATION_H
