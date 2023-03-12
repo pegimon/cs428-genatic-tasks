@@ -11,9 +11,9 @@ Population::Population() {
 
 Population::Population(Chromosome *chromosomes, int size) {
     this->size = size;
-    chromosomes = new Chromosome[size];
+    this->chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
-        chromosomes[i] = this->chromosomes[i];
+         this->chromosomes[i] = chromosomes[i];
     }
 }
 
@@ -21,7 +21,7 @@ Population::Population(Population &population) {
     this->size = population.size;
     population.chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
-        population.chromosomes[i] = this->chromosomes[i];
+        this->chromosomes[i] = population.chromosomes[i];
     }
 }
 
