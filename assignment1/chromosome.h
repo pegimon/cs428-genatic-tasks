@@ -21,5 +21,8 @@ public:
     int fitness();
     void mutation();
     Chromosome *crossOver(Chromosome &c);
+    bool operator==(const Chromosome &c);
+    friend ostream& operator<< (ostream& out, const Chromosome& c);
+    friend istream& operator>> (istream& in, Chromosome& c);
 };
 #endif //ASSIGNMENT1_CHROMOSOME_H
