@@ -10,12 +10,15 @@
 using namespace std;
 class Chromosome {
     Gene *chromosome;
-    int size;
+    int size,seed=10;
 public:
     Chromosome();
     Chromosome(int size);
     Chromosome(Chromosome &c);
     Chromosome(Gene* genes,int size);
     ~Chromosome();
+    int fitness();
+    void mutation();
+    Chromosome *crossOver(Chromosome &c);
 };
 #endif //ASSIGNMENT1_CHROMOSOME_H

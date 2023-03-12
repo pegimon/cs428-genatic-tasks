@@ -7,6 +7,7 @@
 Population::Population() {
         size = 0;
         chromosomes = nullptr;
+        fittest = NULL;
 }
 
 Population::Population(Chromosome *chromosomes, int size) {
@@ -29,10 +30,32 @@ Population::~Population() {
     delete [] chromosomes;
 }
 
-void Population::mutation(int idx) {
-
+Chromosome Population::fitness() {
+    int maxFitness = -1,mxidx;
+    for (int i = 0; i < size; ++i) {
+        int currentFitness = this->chromosomes[i].fitness();
+        if (maxFitness < currentFitness) {
+            maxFitness = currentFitness;
+            mxidx = i;
+        }
+    }
+    return this->chromosomes[mxidx];
 }
 
-Chromosome *Population::crossOver(Chromosome &c1, Chromosome &c2) {
-
+void Population::mutation() {
+    Chromosome c = fitness();
+    c.mutation();
 }
+
+void Population::crossOver() {
+    srand(seed);
+    int idx1 = rand() % size , idx2 = rand() % size;
+    while (idx1 == idx2 && size>1){
+        idx2 = rand() % size;
+    }
+    Chromosome* c = chromosomes[idx1].crossOver(chromosomes[idx2]);
+    if (chromosomes[idx1].fitness() < c[0].fitness()) chromosomes[idx1] = c[0];
+    if (chromosomes[idx2].fitness() < c[1].fitness()) chromosomes[idx2] = c[1];
+}
+
+

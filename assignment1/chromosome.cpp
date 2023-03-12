@@ -31,3 +31,40 @@ Chromosome::Chromosome(Gene *genes, int size) {
         chromosome[i] = genes[i];
     }
 }
+
+int Chromosome::fitness() {
+    int sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += this->chromosome[i].getGene();
+    }
+    return sum;
+}
+
+void Chromosome::mutation() {
+    srand(seed);
+    int idx = rand() % size;
+    if (chromosome[idx].getGene()){
+        chromosome[idx].setGene(false);
+    }else {
+        chromosome[idx].setGene(true);
+    }
+}
+
+Chromosome *Chromosome::crossOver(Chromosome &c) {
+    srand(seed);
+    int idx = rand() % min(size,c.size);
+    Chromosome *chromosomes = new Chromosome[2];
+    for (int i = 0; i < idx; ++i) {
+        Gene tmp = c.chromosome[i];
+        c.chromosome[i] = this->chromosome[i];
+        this->chromosome[i] = tmp;
+    }
+    for (int i = idx; i < min(this->size, c.size); ++i) {
+        Gene tmp = c.chromosome[i];
+        c.chromosome[i] = this->chromosome[i];
+        this->chromosome[i] = tmp;
+    }
+    chromosomes[0] = *this;
+    chromosomes[1] = c;
+    return chromosomes;
+}

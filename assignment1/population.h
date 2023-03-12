@@ -9,14 +9,15 @@
 using namespace std;
 
 class Population {
-    Chromosome *chromosomes;
-    int size;
+    Chromosome *chromosomes,fittest;
+    int size,seed=10;
 public:
     Population();
     Population(Chromosome* chromosomes,int size);
     Population(Population &population);
     ~Population();
-    void mutation(int idx);
-    Chromosome *crossOver(Chromosome &c1,Chromosome &c2);
+    Chromosome fitness();
+    void mutation();
+    void crossOver();
 };
 #endif //ASSIGNMENT1_POPULATION_H
