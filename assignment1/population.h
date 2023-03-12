@@ -15,6 +15,7 @@ public:
     Population();
     Population(Chromosome* chromosomes,int size);
     Population(Population &population);
+    ~Population();
     void mutation(int idx);
     Chromosome *crossOver(Chromosome &c1,Chromosome &c2);
 };

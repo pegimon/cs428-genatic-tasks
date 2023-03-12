@@ -5,8 +5,8 @@
 #include "population.h"
 
 Population::Population() {
-        size = 0;
-        chromosomes = nullptr;
+    size = 0;
+    chromosomes = nullptr;
 }
 
 Population::Population(Chromosome *chromosomes, int size) {
@@ -36,4 +36,3 @@ void Population::mutation(int idx) {
 Chromosome *Population::crossOver(Chromosome &c1, Chromosome &c2) {
 
 }
-
