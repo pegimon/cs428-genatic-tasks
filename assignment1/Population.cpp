@@ -28,3 +28,11 @@ Population::Population(Population &population) {
 Population::~Population() {
     delete [] chromosomes;
 }
+
+void Population::mutation(int idx) {
+
+}
+
+Chromosome *Population::crossOver(Chromosome &c1, Chromosome &c2) {
+
+}
