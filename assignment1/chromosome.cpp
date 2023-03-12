@@ -5,10 +5,11 @@ Chromosome::Chromosome() {
 }
 
 Chromosome::Chromosome(int size) {
+    srand(seed);
     this->size = size;
     chromosome = new Gene[size];
     for (int i = 0; i < size; ++i) {
-        chromosome[i] = new Gene(false);
+        chromosome[i] = new Gene(rand()&1);
     }
 }
 
@@ -67,4 +68,13 @@ Chromosome *Chromosome::crossOver(Chromosome &c) {
     chromosomes[0] = *this;
     chromosomes[1] = c;
     return chromosomes;
+}
+
+Chromosome &Chromosome::operator=(const Chromosome &c) {
+    size = c.size;
+    this->chromosome = new Gene[size];
+    for (int i = 0; i < size; ++i) {
+        this->chromosome[i] = c.chromosome[i];
+    }
+    return *this;
 }

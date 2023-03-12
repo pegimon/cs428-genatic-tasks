@@ -5,9 +5,14 @@
 #include "population.h"
 
 Population::Population() {
-        size = 0;
-        chromosomes = nullptr;
-        fittest = NULL;
+    srand(seed);
+    size = rand() % 100 + 4;
+    int chromosomeSize = rand() % 100 + 4;
+    chromosomes = new Chromosome[size];
+    for (int i = 0; i < size; ++i) {
+        chromosomes[i] = Chromosome(chromosomeSize);
+    }
+    fittest = fitness();
 }
 
 Population::Population(Chromosome *chromosomes, int size) {

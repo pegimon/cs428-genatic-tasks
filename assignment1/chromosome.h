@@ -16,6 +16,7 @@ public:
     Chromosome(int size);
     Chromosome(Chromosome &c);
     Chromosome(Gene* genes,int size);
+    Chromosome &operator=(const Chromosome &c);
     ~Chromosome();
     int fitness();
     void mutation();

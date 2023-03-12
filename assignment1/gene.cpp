@@ -18,6 +18,7 @@ Gene::Gene(bool g) {
 
 Gene &Gene::operator=(const Gene &g) {
     this->gene = g.gene;
+    return *this;
 }
 
 bool Gene::operator==(const Gene &g) {
