@@ -17,7 +17,5 @@ public:
     Chromosome(Chromosome &c);
     Chromosome(Gene* genes,int size);
     ~Chromosome();
-    void mutation(int idx);
-    Chromosome *crossOver(Chromosome &c1,Chromosome &c2);
 };
 #endif //ASSIGNMENT1_CHROMOSOME_H
