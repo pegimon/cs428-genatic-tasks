@@ -78,3 +78,30 @@ Chromosome &Chromosome::operator=(const Chromosome &c) {
     }
     return *this;
 }
+
+bool Chromosome::operator==(const Chromosome &c) {
+    size = c.size;
+    this->chromosome = new Gene[size];
+    if (size == c.size) {
+        for (int i = 0; i < size; i++) {
+            if (!(chromosome[i] == c.chromosome[i]))
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+ostream& operator<< (ostream& out, const Chromosome& c){
+    for (int i = 0; i < c.size; ++i) {
+        out << c.chromosome[i] << ' ';
+    }
+    return out;
+}
+
+istream& operator>> (istream& in, Chromosome& c){
+    for (int i = 0; i < c.size; ++i) {
+        in >> c.chromosome[i] ;
+    }
+    return in;
+}
