@@ -18,7 +18,11 @@ public:
     Population(Population &population);
     ~Population();
     int getSize();
-    int fitness();
+    pair<int,int> fitness();
+    double mean();
+    double var();
+    int maximum();
+    int minimum();
     void mutation();
     void crossOver();
     Population& operator=(const Population &c);

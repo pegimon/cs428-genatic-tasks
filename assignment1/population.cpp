@@ -14,12 +14,12 @@ Population::Population() {
 }
 
 Population::Population(int size) {
-
+    srand(seed+20);
     this->size = size;
     int chromosomeSize = rand() % size + 4;
     chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
-        chromosomes[i] = Chromosome(chromosomeSize);
+        chromosomes[i] = Chromosome(32);
     }
 }
 
@@ -47,7 +47,7 @@ int Population::getSize() {
     return size;
 }
 
-int Population::fitness() {
+pair<int,int> Population::fitness() {
     int maxFitness = -1,mxidx;
     for (int i = 0; i < size; ++i) {
         int currentFitness = this->chromosomes[i].fitness();
@@ -56,11 +56,11 @@ int Population::fitness() {
             mxidx = i;
         }
     }
-    return mxidx;
+    return {mxidx,maxFitness};
 }
 
 void Population::mutation() {
-    int idx = fitness();
+    int idx = fitness().first;
     chromosomes[idx].mutation();
 }
 
@@ -107,3 +107,33 @@ istream &operator>>(istream &in, const Population &p) {
     }
     return in;
 }
+
+double Population::mean() {
+    int sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += this->chromosomes[i].fitness();
+    }
+    return (sum*1.0)/size;
+}
+
+double Population::var() {
+    double variance = 0,mean = this->mean();
+    for (int i = 0; i < size; ++i) {
+        variance += ((this->chromosomes[i].fitness() - mean) * (this->chromosomes[i].fitness() - mean) * 1.0 / (size-1));
+    }
+    return variance;
+}
+
+int Population::maximum() {
+    return this->fitness().second;
+}
+
+int Population::minimum() {
+    int mnm = 1e9;
+    for (int i = 0; i < size; ++i) {
+        mnm = min(mnm,this->chromosomes[i].fitness());
+    }
+    return mnm;
+}
+
+
