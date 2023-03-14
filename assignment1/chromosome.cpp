@@ -49,17 +49,19 @@ void Chromosome::mutation() {
 }
 
 Chromosome *Chromosome::crossOver(Chromosome &c) {
-
     int idx = rand() % min(size,c.size);
+    Chromosome child1(this->size),child2(c.size);
     Chromosome *chromosomes = new Chromosome[2];
     for (int i = 0; i < idx; ++i) {
-        Gene tmp = c.chromosome[i];
-        c.chromosome[i] = this->chromosome[i];
-        this->chromosome[i] = tmp;
+        child1.chromosome[i] = c.chromosome[i];
+        child2.chromosome[i] = this->chromosome[i];
     }
-
-    chromosomes[0] = *this;
-    chromosomes[1] = c;
+    for (int i = idx; i < size; ++i) {
+        child1.chromosome[i] = this->chromosome[i];
+        child2.chromosome[i] = c.chromosome[i];
+    }
+    chromosomes[0] = child1;
+    chromosomes[1] = child2;
     return chromosomes;
 }
 

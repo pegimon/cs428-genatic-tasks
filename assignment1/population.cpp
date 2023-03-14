@@ -71,8 +71,14 @@ void Population::crossOver() {
         idx2 = rand() % size;
     }
     Chromosome* c = chromosomes[idx1].crossOver(chromosomes[idx2]);
-    chromosomes[idx1] = c[0];
-    chromosomes[idx2] = c[1];
+    map<int,int> fitnesses;
+    for (int i = 0; i < size; ++i) {
+        fitnesses[chromosomes[i].fitness()] = i;
+    }
+    auto it = fitnesses.begin();
+    if(c[0].fitness()>chromosomes[it->second].fitness())chromosomes[it->second] = c[0];
+    it++;
+    if(c[1].fitness()>chromosomes[it->second].fitness())chromosomes[it->second] = c[1];
 }
 
 Population &Population::operator=(const Population &c) {
