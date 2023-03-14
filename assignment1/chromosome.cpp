@@ -5,7 +5,6 @@ Chromosome::Chromosome() {
 }
 
 Chromosome::Chromosome(int size) {
-    srand(seed);
     this->size = size;
     chromosome = new Gene[size];
     for (int i = 0; i < size; ++i) {
@@ -42,7 +41,7 @@ int Chromosome::fitness() {
 }
 
 void Chromosome::mutation() {
-    srand(seed);
+
     int idx = rand() % size;
     if (chromosome[idx].getGene()){
         chromosome[idx].setGene(false);
@@ -52,7 +51,7 @@ void Chromosome::mutation() {
 }
 
 Chromosome *Chromosome::crossOver(Chromosome &c) {
-    srand(seed);
+
     int idx = rand() % min(size,c.size);
     Chromosome *chromosomes = new Chromosome[2];
     for (int i = 0; i < idx; ++i) {

@@ -5,7 +5,6 @@
 #include "population.h"
 
 Population::Population() {
-    srand(seed);
     size = rand() % 100 + 4;
     int chromosomeSize = rand() % 100 + 4;
     chromosomes = new Chromosome[size];
@@ -15,7 +14,7 @@ Population::Population() {
 }
 
 Population::Population(int size) {
-    srand(seed);
+
     this->size = size;
     int chromosomeSize = rand() % size + 4;
     chromosomes = new Chromosome[size];
@@ -66,7 +65,7 @@ void Population::mutation() {
 }
 
 void Population::crossOver() {
-    srand(seed);
+
     int idx1 = rand() % size , idx2 = rand() % size;
     while (idx1 == idx2 && size>1){
         idx2 = rand() % size;
