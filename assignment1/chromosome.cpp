@@ -43,9 +43,7 @@ int Chromosome::fitness() {
 void Chromosome::mutation() {
 
     int idx = rand() % size;
-    if (chromosome[idx].getGene()){
-        chromosome[idx].setGene(false);
-    }else {
+    if (!chromosome[idx].getGene()){
         chromosome[idx].setGene(true);
     }
 }
@@ -59,11 +57,7 @@ Chromosome *Chromosome::crossOver(Chromosome &c) {
         c.chromosome[i] = this->chromosome[i];
         this->chromosome[i] = tmp;
     }
-    for (int i = idx; i < min(this->size, c.size); ++i) {
-        Gene tmp = c.chromosome[i];
-        c.chromosome[i] = this->chromosome[i];
-        this->chromosome[i] = tmp;
-    }
+
     chromosomes[0] = *this;
     chromosomes[1] = c;
     return chromosomes;
