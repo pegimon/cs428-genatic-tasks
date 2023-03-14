@@ -14,12 +14,12 @@ Population::Population() {
 }
 
 Population::Population(int size) {
-    srand(seed+20);
+    srand(865132);
     this->size = size;
     int chromosomeSize = rand() % size + 4;
     chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
-        chromosomes[i] = Chromosome(32);
+        chromosomes[i] = Chromosome(50);
     }
 }
 
