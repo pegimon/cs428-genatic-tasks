@@ -5,8 +5,8 @@
 #include "population.h"
 
 Population::Population() {
-    size = rand() % 100 + 4;
-    int chromosomeSize = rand() % 100 + 4;
+    size = 10;
+    int chromosomeSize = 32;
     chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
         chromosomes[i] = Chromosome(chromosomeSize);
@@ -19,7 +19,16 @@ Population::Population(int size) {
     int chromosomeSize = rand() % size + 4;
     chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
-        chromosomes[i] = Chromosome(50);
+        chromosomes[i] = Chromosome(32);
+    }
+}
+Population::Population(int popsize, int C_size) {
+    srand(865132);
+    this->size = popsize;
+    int chromosomeSize = rand() % size + 4;
+    chromosomes = new Chromosome[size];
+    for (int i = 0; i < size; ++i) {
+        chromosomes[i] = Chromosome(C_size);
     }
 }
 
@@ -141,5 +150,7 @@ int Population::minimum() {
     }
     return mnm;
 }
+
+
 
 

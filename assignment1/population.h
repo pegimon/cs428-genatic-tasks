@@ -14,6 +14,7 @@ class Population {
 public:
     Population();
     Population(int size);
+    Population(int popsize,int C_size);
     Population(Chromosome* chromosomes,int size);
     Population(Population &population);
     ~Population();
