@@ -72,7 +72,7 @@ pair<int, int> Population::fitness() {
 void Population::mutation() {
     for (int i = 0; i < size; ++i) {
         ////1% probability for mutation
-        if (rand() % 100 == 99) {
+        if (rand() % 100 >= 80) {
             chromosomes[i].mutation();
         }
     }

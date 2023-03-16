@@ -2,7 +2,7 @@
 #include "population.h"
 #define el '\n'
 int main() {
-    Population p(5);
+    Population p(10,32);
     double stop_condition=0,currentmax=p.maximum();
     int count=0,fitness = p.fitness().second;
     int arr[1000];
@@ -21,8 +21,8 @@ int main() {
         cout <<"mean: " << p.mean() << ", max: " << p.maximum() << ", min: " << p.minimum() << ", variance: " << p.var() << el << el;
         stop_condition+=abs(p.maximum()-currentmax);
         currentmax=p.maximum();
-        if (count%100==0){
-            if (stop_condition<1){
+        if (count%50==0){
+            if (stop_condition<2){
                 cout<<"not enough progress"<<endl;
                 break;
             }
