@@ -14,7 +14,7 @@ Population::Population() {
 }
 
 Population::Population(int size) {
-    srand(865132);
+    srand(::time(NULL));
     this->size = size;
     int chromosomeSize = rand() % size + 4;
     chromosomes = new Chromosome[size];
@@ -24,7 +24,7 @@ Population::Population(int size) {
 }
 
 Population::Population(int popsize, int C_size) {
-    srand(865132);
+    srand(::time(NULL));
     this->size = popsize;
     int chromosomeSize = rand() % size + 4;
     chromosomes = new Chromosome[size];

@@ -50,7 +50,7 @@ void Chromosome::mutation() {
     int idx = rand() % size;
     if (!chromosome[idx].getGene()) {
         chromosome[idx].setGene(true);
-    }
+    } else chromosome[idx].setGene(false);
     this->myfitness();
 
 }
