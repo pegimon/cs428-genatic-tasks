@@ -10,7 +10,7 @@
 using namespace std;
 class Chromosome {
     Gene *chromosome;
-    int size,seed=10;
+    int size,fitness;
 public:
     Chromosome();
     Chromosome(int size);
@@ -18,7 +18,8 @@ public:
     Chromosome(Gene* genes,int size);
     Chromosome &operator=(const Chromosome &c);
     ~Chromosome();
-    int fitness();
+    int get_fitness();
+    void myfitness();
     void mutation();
     Chromosome *crossOver(Chromosome &c);
     bool operator==(const Chromosome &c);

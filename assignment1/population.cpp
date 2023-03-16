@@ -59,7 +59,7 @@ int Population::getSize() {
 pair<int,int> Population::fitness() {
     int maxFitness = -1,mxidx;
     for (int i = 0; i < size; ++i) {
-        int currentFitness = this->chromosomes[i].fitness();
+        int currentFitness = this->chromosomes[i].get_fitness();
         if (maxFitness < currentFitness) {
             maxFitness = currentFitness;
             mxidx = i;
@@ -82,12 +82,12 @@ void Population::crossOver() {
     Chromosome* c = chromosomes[idx1].crossOver(chromosomes[idx2]);
     map<int,int> fitnesses;
     for (int i = 0; i < size; ++i) {
-        fitnesses[chromosomes[i].fitness()] = i;
+        fitnesses[chromosomes[i].get_fitness()] = i;
     }
     auto it = fitnesses.begin();
-    if(c[0].fitness()>chromosomes[it->second].fitness())chromosomes[it->second] = c[0];
+    if(c[0].get_fitness()>chromosomes[it->second].get_fitness())chromosomes[it->second] = c[0];
     it++;
-    if(c[1].fitness()>chromosomes[it->second].fitness())chromosomes[it->second] = c[1];
+    if(c[1].get_fitness()>chromosomes[it->second].get_fitness())chromosomes[it->second] = c[1];
 }
 
 Population &Population::operator=(const Population &c) {
@@ -126,7 +126,7 @@ istream &operator>>(istream &in, const Population &p) {
 double Population::mean() {
     int sum = 0;
     for (int i = 0; i < size; ++i) {
-        sum += this->chromosomes[i].fitness();
+        sum += this->chromosomes[i].get_fitness();
     }
     return (sum*1.0)/size;
 }
@@ -134,7 +134,7 @@ double Population::mean() {
 double Population::var() {
     double variance = 0,mean = this->mean();
     for (int i = 0; i < size; ++i) {
-        variance += ((this->chromosomes[i].fitness() - mean) * (this->chromosomes[i].fitness() - mean) * 1.0 / (size-1));
+        variance += ((this->chromosomes[i].get_fitness() - mean) * (this->chromosomes[i].get_fitness() - mean) * 1.0 / (size-1));
     }
     return variance;
 }
@@ -146,7 +146,7 @@ int Population::maximum() {
 int Population::minimum() {
     int mnm = 1e9;
     for (int i = 0; i < size; ++i) {
-        mnm = min(mnm,this->chromosomes[i].fitness());
+        mnm = min(mnm,this->chromosomes[i].get_fitness());
     }
     return mnm;
 }
