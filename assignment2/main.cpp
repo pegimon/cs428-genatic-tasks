@@ -2,6 +2,7 @@
 #include "population.h"
 #define el '\n'
 int main() {
+
     Population p(10,32);
     double stop_condition=0,currentmax=p.maximum();
     int count=0,fitness = p.fitness().second;
