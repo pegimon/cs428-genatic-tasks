@@ -1,17 +1,18 @@
 #ifndef ASSIGNMENT1_GENE_H
 #define ASSIGNMENT1_GENE_H
 #include <bits/stdc++.h>
+
 using namespace std;
 class Gene {
-    bool gene;
+    double gene;
 
 public:
     Gene();
-    Gene(bool g);
-    bool getGene();
-    void setGene(bool g);
+    Gene(double g);
+    double getGene();
+    void setGene(double g);
     Gene &operator=(const Gene &g);
-    bool operator==(const Gene &g);
+    double operator==(const Gene &g);
     friend ostream& operator<< (ostream& out, const Gene& g);
     friend istream& operator>> (istream& in, Gene& g);
 };

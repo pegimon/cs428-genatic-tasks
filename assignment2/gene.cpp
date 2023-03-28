@@ -1,18 +1,18 @@
 #include "gene.h"
 
-bool Gene::getGene() {
+double Gene::getGene() {
     return gene;
 }
 
-void Gene::setGene(bool g) {
+void Gene::setGene(double g) {
     gene = g;
 }
 
 Gene::Gene() {
-    gene = false;
+    gene = 0.0;
 }
 
-Gene::Gene(bool g) {
+Gene::Gene(double g) {
     gene = g;
 }
 
@@ -21,7 +21,7 @@ Gene &Gene::operator=(const Gene &g) {
     return *this;
 }
 
-bool Gene::operator==(const Gene &g) {
+double Gene::operator==(const Gene &g) {
     if (this->gene == g.gene){
         return true;
     }
@@ -34,7 +34,7 @@ ostream &operator<< (ostream& out, const Gene& g){
 }
 
 istream& operator>> (istream& in,Gene& g){
-    bool input;
+    double input;
     in >> input;
     g.setGene(input);
     return in;

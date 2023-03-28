@@ -10,7 +10,7 @@ Chromosome::Chromosome(int size) {
     this->size = size;
     chromosome = new Gene[size];
     for (int i = 0; i < size; ++i) {
-        chromosome[i] = Gene(rand() & 1);
+        chromosome[i] = Gene(1.0 * rand() / RAND_MAX * 21.0 - 10.0);
     }
     myfitness();
 }
