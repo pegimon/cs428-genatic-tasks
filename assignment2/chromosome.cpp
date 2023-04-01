@@ -56,17 +56,16 @@ void Chromosome::mutation() {
 }
 
 Chromosome *Chromosome::crossOver(Chromosome &c) {
-    int idx = rand() % min(size, c.size);
-    Chromosome child1(this->size), child2(c.size);
+    int idx = rand() % size;
+    double B = (rand() * 1.0/RAND_MAX) * 21 - 10;
+    Chromosome child1(size), child2(size);
     Chromosome *chromosomes = new Chromosome[2];
-    for (int i = 0; i < idx; ++i) {
+    for (int i = 0; i < size; ++i) {
         child1.chromosome[i] = c.chromosome[i];
         child2.chromosome[i] = this->chromosome[i];
     }
-    for (int i = idx; i < size; ++i) {
-        child1.chromosome[i] = this->chromosome[i];
-        child2.chromosome[i] = c.chromosome[i];
-    }
+    child1.chromosome[idx].setGene((1 - B) * child1.chromosome[idx].getGene() + B * child2.chromosome[idx].getGene());
+    child2.chromosome[idx].setGene((1 + B) * child2.chromosome[idx].getGene() - B * child1.chromosome[idx].getGene());
     child1.myfitness();
     child2.myfitness();
     chromosomes[0] = child1;
