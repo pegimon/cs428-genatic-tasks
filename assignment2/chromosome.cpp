@@ -46,13 +46,10 @@ void Chromosome::myfitness() {
 }
 
 void Chromosome::mutation() {
-
     int idx = rand() % size;
-    if (!chromosome[idx].getGene()) {
-        chromosome[idx].setGene(true);
-    } else chromosome[idx].setGene(false);
+    double newGene = (rand() * 1.0/RAND_MAX) * 21 - 10;
+    chromosome[idx].setGene(newGene);
     this->myfitness();
-
 }
 
 Chromosome *Chromosome::crossOver(Chromosome &c) {
