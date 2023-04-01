@@ -11,11 +11,11 @@ using namespace std;
 class Population {
     Chromosome *chromosomes;
     int size,seed=10;
+    double *points,*values;
 public:
-    Population();
-    Population(int size);
-    Population(int popsize,int C_size);
-    Population(Chromosome* chromosomes,int size);
+
+    Population(int popsize,int C_size,double *points,double *values);
+    Population(Chromosome* chromosomes,int size,double *points,double *value );
     Population(Population &population);
     ~Population();
     int getSize();
@@ -26,6 +26,7 @@ public:
     int minimum();
     void mutation();
     void crossOver();
+    int * selection();
     Population& operator=(const Population &c);
     bool operator==(const Population &c);
     friend ostream& operator<<(ostream &out,const Population& p);
