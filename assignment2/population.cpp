@@ -4,40 +4,29 @@
 
 #include "population.h"
 
-Population::Population() {
-    size = 10;
-    int chromosomeSize = 32;
-    chromosomes = new Chromosome[size];
-    for (int i = 0; i < size; ++i) {
-        chromosomes[i] = Chromosome(chromosomeSize);
-    }
-}
 
-Population::Population(int size) {
-    srand(::time(NULL));
-    this->size = size;
-    int chromosomeSize = rand() % size + 4;
-    chromosomes = new Chromosome[size];
-    for (int i = 0; i < size; ++i) {
-        chromosomes[i] = Chromosome(32);
-    }
-}
-
-Population::Population(int popsize, int C_size) {
+Population::Population(int popsize, int C_size, double *points, double *values) {
     srand(::time(NULL));
     this->size = popsize;
-    int chromosomeSize = rand() % size + 4;
+    this->points=points;
+    this->values=values;
     chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
         chromosomes[i] = Chromosome(C_size);
+        chromosomes[i].myfitness(this->points, this->values);
     }
+
+
 }
 
-Population::Population(Chromosome *chromosomes, int size) {
+Population::Population(Chromosome *chromosomes, int size, double *points, double *value) {
     this->size = size;
     this->chromosomes = new Chromosome[size];
+    this->points=points;
+    this->values=values;
     for (int i = 0; i < size; ++i) {
         this->chromosomes[i] = chromosomes[i];
+        chromosomes[i].myfitness(this->points, this->values);
     }
 }
 
@@ -95,6 +84,24 @@ void Population::crossOver() {
     if (c[1].get_fitness() > chromosomes[it->second].get_fitness())chromosomes[it->second] = c[1];
 }
 
+///RETURNS INDEXES OF BEST 50% INDIVISUALS ON CURRENT POPULATION
+///EVEN NUMBER OF CHROMOSOMES ONLY!!!
+int *Population::selection() {
+    int best50[size / 2];
+    double indexed[size], tosort[size];
+    int n = sizeof(indexed) / sizeof(indexed[0]);
+    for (int i = 0; i < size; ++i) {
+        indexed[i] = chromosomes[i].get_fitness();
+        tosort[i] = indexed[i];
+    }
+    sort(tosort, tosort + n, greater<double>());
+    for (int i = 0; i < size / 2; ++i) {
+        auto itr = find(indexed, indexed + n, tosort[i]);
+        best50[i] = distance(tosort, itr);
+    }
+    return best50;
+}
+
 Population &Population::operator=(const Population &c) {
     this->size = c.size;
     this->chromosomes = new Chromosome[size];
@@ -122,6 +129,7 @@ ostream &operator<<(ostream &out, const Population &p) {
 }
 
 istream &operator>>(istream &in, const Population &p) {
+
     for (int i = 0; i < p.size; ++i) {
         in >> p.chromosomes[i];
     }

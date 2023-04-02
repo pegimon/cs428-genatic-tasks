@@ -3,7 +3,10 @@
 assignment1/.idea/assignment1.iml
 assignment1/.idea/misc.xml
 assignment1/.idea/modules.xml
+assignment1/.idea/shelf/Uncommitted_changes_before_Update_at_3_12_2023_3_58_PM_\[Changes\]/shelved.patch
+assignment1/.idea/shelf/Uncommitted_changes_before_Update_at_3_12_2023_3_58_PM__Changes_.xml
 assignment1/.idea/vcs.xml
+assignment1/.idea/workspace.xml
 assignment1/cmake-build-debug/.cmake/api/v1/query/cache-v2
 assignment1/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1
 assignment1/cmake-build-debug/.cmake/api/v1/query/codemodel-v2
@@ -46,6 +49,7 @@ assignment2/.idea/assignment2.iml
 assignment2/.idea/misc.xml
 assignment2/.idea/modules.xml
 assignment2/.idea/vcs.xml
+assignment2/.idea/workspace.xml
 assignment2/cmake-build-debug/.cmake/api/v1/query/cache-v2
 assignment2/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1
 assignment2/cmake-build-debug/.cmake/api/v1/query/codemodel-v2

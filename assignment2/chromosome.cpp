@@ -12,7 +12,7 @@ Chromosome::Chromosome(int size) {
     for (int i = 0; i < size; ++i) {
         chromosome[i] = Gene(1.0 * rand() / RAND_MAX * 21.0 - 10.0);
     }
-    myfitness();
+
 }
 
 Chromosome::Chromosome(Chromosome &c) {
@@ -34,15 +34,17 @@ Chromosome::Chromosome(Gene *genes, int size) {
     for (int i = 0; i < size; ++i) {
         chromosome[i] = genes[i];
     }
-    myfitness();
 }
-
-void Chromosome::myfitness() {
+///f(x)=(a0*1)+(a1*x)+(a0*x^2)....
+void Chromosome::myfitness(double *goalpoint, double *goalvalue) {
     fitness = 0;
-    for (int i = 0; i < size; ++i) {
-        fitness += this->chromosome[i].getGene();
+    for (int j = 0; j < sizeof(goalpoint) / sizeof(goalpoint[0]); ++j) {
+        int func = 0;
+        for (int i = 0; i < size; ++i) {
+            func += chromosome[i].getGene() * ::pow(goalpoint[j], i);
+        }
+        fitness += func - goalvalue[j];
     }
-
 }
 
 void Chromosome::mutation() {
@@ -77,7 +79,7 @@ Chromosome &Chromosome::operator=(const Chromosome &c) {
     for (int i = 0; i < size; ++i) {
         this->chromosome[i] = c.chromosome[i];
     }
-    this->myfitness();
+    this->fitness = c.fitness;
     return *this;
 }
 
@@ -108,6 +110,6 @@ istream &operator>>(istream &in, Chromosome &c) {
     return in;
 }
 
-int Chromosome::get_fitness() {
+double Chromosome::get_fitness() {
     return fitness;
 }
