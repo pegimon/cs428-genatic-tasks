@@ -56,7 +56,7 @@ void Chromosome::mutation() {
 
 Chromosome *Chromosome::crossOver(Chromosome &c) {
     int idx = rand() % size;
-    double B = (rand() * 1.0/RAND_MAX) * 21 - 10;
+    double B = (rand() * 1.0/RAND_MAX);
     Chromosome child1(size), child2(size);
     Chromosome *chromosomes = new Chromosome[2];
     for (int i = 0; i < size; ++i) {
