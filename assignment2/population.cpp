@@ -91,7 +91,7 @@ void Population::selection() {
         indexed[i] = chromosomes[i].get_fitness();
         tosort[i] = indexed[i];
     }
-    sort(tosort, tosort + size, greater<double>());
+    sort(tosort, tosort + size);
     for (int i = 0; i < size / 2; ++i) {
         auto itr = find(indexed, indexed + size, tosort[i]);
         best50[i] = distance(tosort, itr);
