@@ -158,7 +158,7 @@ int Population::maximum() {
 }
 
 int Population::minimum() {
-    int mnm = 1e9;
+    double mnm = 1e9;
     for (int i = 0; i < size; ++i) {
         mnm = min(mnm, this->chromosomes[i].get_fitness());
     }
