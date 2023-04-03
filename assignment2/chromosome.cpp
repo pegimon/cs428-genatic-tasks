@@ -36,9 +36,9 @@ Chromosome::Chromosome(Gene *genes, int size) {
     }
 }
 ///f(x)=(a0*1)+(a1*x)+(a0*x^2)....
-void Chromosome::myfitness(double *goalpoint, double *goalvalue) {
+void Chromosome::myfitness() {
     fitness = 0;
-    for (int j = 0; j < sizeof(goalpoint) / sizeof(goalpoint[0]); ++j) {
+    for (int j = 0; j < size; ++j) {
         int func = 0;
         for (int i = 0; i < size; ++i) {
             func += chromosome[i].getGene() * ::pow(goalpoint[j], i);
@@ -112,4 +112,18 @@ istream &operator>>(istream &in, Chromosome &c) {
 
 double Chromosome::get_fitness() {
     return fitness;
+}
+
+Chromosome::Chromosome(int size, double *goalpoint, double* goalvalue) {
+    this->size = size;
+    chromosome = new Gene[size];
+    for (int i = 0; i < size; ++i) {
+        chromosome[i] = Gene(1.0 * rand() / RAND_MAX * 21.0 - 10.0);
+    }
+    this->goalpoint = new double[size];
+    this->goalvalue = new double[size];
+    for (int i = 0; i < size; ++i) {
+        this->goalpoint[i] = goalpoint[i];
+        this->goalvalue[i] = goalvalue[i];
+    }
 }

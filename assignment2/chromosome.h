@@ -12,11 +12,14 @@ using namespace std;
 
 class Chromosome {
     Gene *chromosome;
+    double *goalpoint, *goalvalue;
     int size, fitness;
 public:
     Chromosome();
 
     Chromosome(int size);
+
+    Chromosome(int size, double *goalpoint, double* goalvalue);
 
     Chromosome(Chromosome &c);
 
@@ -28,7 +31,7 @@ public:
 
     double get_fitness();
 
-    void myfitness(double *goalpoint, double *goalvalue);
+    void myfitness();
 
     void mutation();
 

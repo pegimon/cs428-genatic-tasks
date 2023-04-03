@@ -12,21 +12,19 @@ Population::Population(int popsize, int C_size, double *points, double *values) 
     this->values=values;
     chromosomes = new Chromosome[size];
     for (int i = 0; i < size; ++i) {
-        chromosomes[i] = Chromosome(C_size);
-        chromosomes[i].myfitness(this->points, this->values);
+        chromosomes[i] = Chromosome(C_size, this->points, this->values);
+        chromosomes[i].myfitness();
     }
-
-
 }
 
 Population::Population(Chromosome *chromosomes, int size, double *points, double *value) {
     this->size = size;
     this->chromosomes = new Chromosome[size];
     this->points=points;
-    this->values=values;
+    this->values=value;
     for (int i = 0; i < size; ++i) {
         this->chromosomes[i] = chromosomes[i];
-        chromosomes[i].myfitness(this->points, this->values);
+        chromosomes[i].myfitness();
     }
 }
 
@@ -47,15 +45,15 @@ int Population::getSize() {
 }
 
 pair<int, int> Population::fitness() {
-    int maxFitness = -1, mxidx;
+    int minFitness = 1e9, mnidx;
     for (int i = 0; i < size; ++i) {
         int currentFitness = this->chromosomes[i].get_fitness();
-        if (maxFitness < currentFitness) {
-            maxFitness = currentFitness;
-            mxidx = i;
+        if (minFitness > currentFitness) {
+            minFitness = currentFitness;
+            mnidx = i;
         }
     }
-    return {mxidx, maxFitness};
+    return {mnidx, minFitness};
 }
 
 void Population::mutation() {
@@ -69,12 +67,12 @@ void Population::mutation() {
 
 void Population::crossOver() {
 
-    int idx1 = rand() % size, idx2 = rand() % size;
+    int idx1 = rand() % (size / 2), idx2 = rand() % (size / 2);
     while (idx1 == idx2 && size > 1) {
-        idx2 = rand() % size;
+        idx2 = rand() % (size / 2);
     }
-    Chromosome *c = chromosomes[idx1].crossOver(chromosomes[idx2]);
-    map<int, int> fitnesses;
+    Chromosome *c = selected[idx1].crossOver(selected[idx2]);
+    map<double, int> fitnesses;
     for (int i = 0; i < size; ++i) {
         fitnesses[chromosomes[i].get_fitness()] = i;
     }
@@ -86,20 +84,22 @@ void Population::crossOver() {
 
 ///RETURNS INDEXES OF BEST 50% INDIVISUALS ON CURRENT POPULATION
 ///EVEN NUMBER OF CHROMOSOMES ONLY!!!
-int *Population::selection() {
-    int best50[size / 2];
+void Population::selection() {
+    int *best50 = new int[size / 2];
     double indexed[size], tosort[size];
-    int n = sizeof(indexed) / sizeof(indexed[0]);
     for (int i = 0; i < size; ++i) {
         indexed[i] = chromosomes[i].get_fitness();
         tosort[i] = indexed[i];
     }
-    sort(tosort, tosort + n, greater<double>());
+    sort(tosort, tosort + size);
     for (int i = 0; i < size / 2; ++i) {
-        auto itr = find(indexed, indexed + n, tosort[i]);
+        auto itr = find(indexed, indexed + size, tosort[i]);
         best50[i] = distance(tosort, itr);
     }
-    return best50;
+    selected = new Chromosome[size / 2];
+    for (int i = 0; i < size / 2; ++i) {
+        selected[i] = chromosomes[best50[i]];
+    }
 }
 
 Population &Population::operator=(const Population &c) {
@@ -158,7 +158,7 @@ int Population::maximum() {
 }
 
 int Population::minimum() {
-    int mnm = 1e9;
+    double mnm = 1e9;
     for (int i = 0; i < size; ++i) {
         mnm = min(mnm, this->chromosomes[i].get_fitness());
     }

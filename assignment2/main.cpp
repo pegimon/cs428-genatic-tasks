@@ -2,8 +2,14 @@
 #include "population.h"
 #define el '\n'
 int main() {
-
-    Population p(10,32);
+    int n, size;
+    cin >> n >> size;
+    size++;
+    double *points = new double[n], *values = new double[n];
+    for (int i = 0; i < n; ++i) {
+        cin >> points[i] >> values[i];
+    }
+    Population p(10,size,points,values);
     double stop_condition=0,currentmax=p.maximum();
     int count=0,fitness = p.fitness().second;
     int arr[1000];
@@ -12,6 +18,7 @@ int main() {
     }
     int mnm = 1e6;
     while (true){
+        p.selection();
         p.crossOver();
         p.mutation();
         fitness = p.fitness().second;

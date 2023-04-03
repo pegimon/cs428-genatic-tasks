@@ -9,7 +9,7 @@
 using namespace std;
 
 class Population {
-    Chromosome *chromosomes;
+    Chromosome *chromosomes, *selected = nullptr;
     int size,seed=10;
     double *points,*values;
 public:
@@ -26,7 +26,7 @@ public:
     int minimum();
     void mutation();
     void crossOver();
-    int * selection();
+    void selection();
     Population& operator=(const Population &c);
     bool operator==(const Population &c);
     friend ostream& operator<<(ostream &out,const Population& p);
